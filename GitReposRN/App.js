@@ -12,6 +12,9 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  ToastAndroid,
+  Platform,
+  Alert,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -21,6 +24,9 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import {
   Colors,
@@ -53,11 +59,15 @@ export default class App extends Component {
   }
 
   customCell = (item) => {
-    return (<TouchableOpacity style = {styles.button}>
+    return (<TouchableOpacity style = {styles.button} onPress = {this.onPress}>
       <Text style = {{ fontSize: 16, fontWeight: 'bold', textAlign: 'center' }}> {item.name} </Text>
       <Text style = {{ marginTop: 8 }}> {item.description} </Text>
       <Image source = {{ uri: item.owner.avatar_url }} style = {{ marginTop: 12, height : 100, width: 100, alignSelf: 'center', borderRadius: 24 }}></Image>
     </TouchableOpacity>)
+  }
+
+  onPress = () => {
+    this.props.navigation.navigate('DetailsPage');
   }
 
   render() {
