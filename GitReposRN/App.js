@@ -11,11 +11,13 @@ import type {Node} from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -50,18 +52,24 @@ export default class App extends Component {
       });
   }
 
+  customCell = (item) => {
+    return (<TouchableOpacity style = {styles.button}>
+      <Text style = {{ fontSize: 16, fontWeight: 'bold', textAlign: 'center' }}> {item.name} </Text>
+      <Text style = {{ marginTop: 8 }}> {item.description} </Text>
+      <Image source = {{ uri: item.owner.avatar_url }} style = {{ marginTop: 12, height : 100, width: 100, alignSelf: 'center', borderRadius: 24 }}></Image>
+    </TouchableOpacity>)
+  }
+
   render() {
     const { data, isLoading } = this.state;
 
     return (
-        <View style = {{ flex: 1, padding: 24 }}>
+        <View style = { [{ backgroundColor: '#ffffa6'}, styles.sectionContainer] }>
           { isLoading ? <ActivityIndicator/> : (
             <FlatList
               data = { data }
               keyExtractor = {( { id }, index) => id}
-              renderItem = { ( {item}) => (
-                <Text> {item.name} </Text>
-              )}
+              renderItem = { ( {item}) => this.customCell(item) }
             />
           )}
         </View>
@@ -73,8 +81,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   sectionContainer: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 32,
-    paddingHorizontal: 24,
+    marginTop:  32,
   },
   sectionTitle: {
     fontSize: 20,
@@ -93,5 +100,13 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 12,
+  },
+  button: {
+    flex: 1,
+    flexDirection : "column",
+    margin: 8,
+    backgroundColor: '#dce775',
+    padding: 12,
+    borderRadius: 12
   }
 });
