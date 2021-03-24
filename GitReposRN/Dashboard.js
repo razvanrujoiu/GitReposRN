@@ -26,9 +26,9 @@ import {
     ReloadInstructions,
   } from 'react-native/Libraries/NewAppScreen';
 
-export function DetailsPage({ navigation }) {
-    return (<View style = {{ flex: 1 }}>
-        <Text>Hello world</Text>
+export function Dashboard({ navigation }) {
+    return (<View style = {{ flex: 1, textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Dashboard</Text>
     </View>)
 }
 
