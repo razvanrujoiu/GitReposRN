@@ -49,7 +49,7 @@ export class HomePage extends Component {
     }
   
     customCell = (item) => {
-      return (<TouchableOpacity style = {styles.button} onPress = {this.onPress}>
+      return (<TouchableOpacity style = {styles.button} >
         <Text style = {{ fontSize: 16, fontWeight: 'bold', textAlign: 'center' }}> {item.name} </Text>
         <Text style = {{ marginTop: 8 }}> {item.description} </Text>
         <Image source = {{ uri: item.owner.avatar_url }} style = {{ marginTop: 12, height : 100, width: 100, alignSelf: 'center', borderRadius: 24 }}></Image>
@@ -76,10 +76,7 @@ export class HomePage extends Component {
       )
     }
   }
-  
-  
-  
-  
+    
   const styles = StyleSheet.create({
     sectionContainer: {
       flex: 1,
