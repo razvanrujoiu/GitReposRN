@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React, {Component} from 'react';
-import type {Node} from 'react';
+import React, { Component } from 'react';
+
 import {
   ActivityIndicator,
   FlatList,
@@ -24,10 +24,12 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { StackRouter, withNavigation } from 'react-navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import 'react-native-gesture-handler';
+
 
 
 import {
@@ -43,15 +45,30 @@ import { DetailsPage } from './DetailsPage';
 import { Dashboard } from './Dashboard';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+
+export function HomeStackScreens({ navigation }) {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomePage} />
+      <Stack.Screen name="Details" component={DetailsPage} />
+    </Stack.Navigator>
+  );
+}
+
+export function BottomTabs({ navigation }) {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeStackScreens} />
+      <Tab.Screen name="Dashboard" component={Dashboard} />
+    </Tab.Navigator>)
+}
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="HomePage" component={HomePage} />
-        <Tab.Screen name="Dashboard" component={Dashboard} />
-      </Tab.Navigator>
+      <BottomTabs />
     </NavigationContainer>
   );
 }
-

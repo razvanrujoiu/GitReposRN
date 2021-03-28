@@ -17,6 +17,8 @@ import {
   View,
 } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native'
+
 
 import {
     Colors,
@@ -25,6 +27,11 @@ import {
     LearnMoreLinks,
     ReloadInstructions,
   } from 'react-native/Libraries/NewAppScreen';
+
+import { DetailsPage } from './DetailsPage';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 export class HomePage extends Component {
     constructor(props) {
@@ -47,20 +54,28 @@ export class HomePage extends Component {
           this.setState({ isLoading: false });
         });
     }
+
+    componentWillUnmount() {
+      // fix Warning: Can't perform a React state update on an unmounted component
+      this.setState = (state,callback)=>{
+          return;
+      };
+  }
   
     customCell = (item) => {
-      return (<TouchableOpacity style = {styles.button} >
+      return (<TouchableOpacity style = {styles.button} onPress = { () => { this.onCellPress() }} >
         <Text style = {{ fontSize: 16, fontWeight: 'bold', textAlign: 'center' }}> {item.name} </Text>
         <Text style = {{ marginTop: 8 }}> {item.description} </Text>
         <Image source = {{ uri: item.owner.avatar_url }} style = {{ marginTop: 12, height : 100, width: 100, alignSelf: 'center', borderRadius: 24 }}></Image>
       </TouchableOpacity>)
     }
   
-    onPress = () => {
-      this.props.navigation.navigate('DetailsPage');
+    onCellPress = () => {
+        this.props.navigation.push('Details');
     }
   
     render() {
+      
       const { data, isLoading } = this.state;
   
       return (

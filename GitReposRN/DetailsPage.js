@@ -30,5 +30,6 @@ export function DetailsPage({ navigation }) {
     return (<View style = {{ flex: 1 }}>
         <Text>Hello world</Text>
     </View>)
+    
 }
 
