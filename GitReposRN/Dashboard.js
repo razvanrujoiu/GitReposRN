@@ -24,6 +24,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export function Dashboard({navigation}) {
   return (
@@ -36,7 +37,7 @@ export function Dashboard({navigation}) {
             onPress={() => {
               alert('Demarre');
             }}>
-            <Text style={styles.demarrer}>Demarrer</Text>
+            <Text style={styles.demarrer}>Démarrer</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
@@ -57,7 +58,7 @@ export function Dashboard({navigation}) {
               Cette semaine
             </Text>
 
-            <Text>Go</Text>
+            <Icon size={20} color="black" name="arrow-forward-outline" />
           </View>
           <View style={{flexDirection: 'row'}}></View>
         </TouchableOpacity>
