@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 24,
     marginLeft: 12,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   demarrer: {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     marginLeft: 44,
     marginRight: 44,
     marginTop: 55,
-    height: 55,
-    borderRadius: 33,
+    height: 60,
+    borderRadius: 30,
   },
 });
