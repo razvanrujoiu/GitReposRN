@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
+  Linking,
 } from 'react-native';
 
 import {
@@ -25,8 +26,12 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+// import Icon from 'react-native-vector-icons/Ionicons';
+// Icon.loadFont();
+
 export function DetailsPage({route, navigation}) {
   const {item} = route.params;
+  // const forkIcon = Icon.getImageSourceSync('code-fork', 24, 'black');
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffa6'}}>
@@ -34,8 +39,26 @@ export function DetailsPage({route, navigation}) {
         <Image source={{uri: item.owner.avatar_url}} style={styles.image} />
         <Text style={styles.repoTitle}>{item.full_name}</Text>
         <Text style={styles.repoDescription}>{item.description}</Text>
+        <TouchableOpacity>
+          <Text
+            style={{color: 'blue', textAlign: 'center'}}
+            onPress={() => {
+              Linking.openURL(item.html_url);
+            }}>
+            {item.html_url}
+          </Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.bottomView}></View>
+      <View style={styles.bottomView}>
+        <View style={{flexDirection: 'row', margin: 12}}>
+          <Text>Stars:</Text>
+          <Text>{item.stargazers_count}</Text>
+        </View>
+        <View style={{flexDirection: 'row', margin: 12}}>
+          <Text>Forks:</Text>
+          <Text>{item.forks_count}</Text>
+        </View>
+      </View>
     </SafeAreaView>
   );
 }
@@ -68,4 +91,5 @@ const styles = StyleSheet.create({
     margin: 12,
     textAlign: 'center',
   },
+  url: {},
 });
